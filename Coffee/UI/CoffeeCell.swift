@@ -7,7 +7,15 @@
 
 import SwiftUI
 
+/// Next session:
+/// - Insert the ``CoffeeModel`` inside the ``CoffeeCell``
+/// - Insert the ``CoffeeModel`` inside the ``CoffeeDetailView``
+/// - Create a ViewModel to generate the favorite coffees 
+
 struct CoffeeCell: View {
+    
+    let coffee: CoffeeModel
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 16) {
@@ -15,10 +23,10 @@ struct CoffeeCell: View {
                     .imageScale(.large)
                     .foregroundColor(Color.accentColor)
                 VStack(alignment: .leading) {
-                    Text("Coffee name")
+                    Text(coffee.name)
                         .font(.headline)
                         .foregroundColor(.primary)
-                    Text("Location")
+                    Text(coffee.locationName)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -38,7 +46,7 @@ struct CoffeeCell_Previews: PreviewProvider {
             NavigationLink {
                 Text("Destination")
             } label: {
-                CoffeeCell()
+                CoffeeCell(coffee: .dummy)
             }
         }
 

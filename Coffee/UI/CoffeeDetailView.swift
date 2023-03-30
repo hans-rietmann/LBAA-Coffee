@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CoffeeDetailView: View {
+    
+    let coffee: CoffeeModel
+    
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
@@ -19,13 +22,13 @@ struct CoffeeDetailView: View {
                     .frame(height: 400)
                     .background(Color.gray)
                 
-                Text("Description")
+                Text(coffee.description)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .padding()
                 
                 VStack(alignment: .leading) {
-                    Text("Coffee location name")
+                    Text(coffee.locationName)
                         .font(.headline)
                     Color.yellow
                         .frame(height: 200)
@@ -33,14 +36,14 @@ struct CoffeeDetailView: View {
                 .padding()
             }
         }
-        .navigationTitle("Coffee name")
+        .navigationTitle(coffee.name)
     }
 }
 
 struct CoffeeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CoffeeDetailView()
+            CoffeeDetailView(coffee: .dummy)
         }
     }
 }

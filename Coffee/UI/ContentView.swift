@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let coffees: [CoffeeModel]
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack {
-                    ForEach((0..<10)) { index in
+                    ForEach(coffees) { coffee in
                         NavigationLink {
-                            
+                            CoffeeDetailView(coffee: coffee)
                         } label: {
-                            CoffeeCell()
+                            CoffeeCell(coffee: coffee)
                         }
                     }
                 }
@@ -28,6 +31,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(coffees: CoffeeModel.dummies)
+        ContentView(coffees: CoffeeModel.dummies)
+            .preferredColorScheme(.dark)
     }
 }
