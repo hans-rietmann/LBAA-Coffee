@@ -32,7 +32,10 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(coffees: CoffeeModel.dummies)
-        ContentView(coffees: CoffeeModel.dummies)
+            .colorInvert()
+            .dynamicTypeSize(.xxxLarge)
             .preferredColorScheme(.dark)
+            .underline()
+        ContentView(coffees: CoffeeModel.dummies)
     }
 }

@@ -9,7 +9,8 @@ import Foundation
 import CoreLocation
 
 
-struct CoffeeModel: Identifiable {
+struct CoffeeModel: Identifiable, Equatable {
+    
     
     let id = UUID()
     let name: String
@@ -17,6 +18,9 @@ struct CoffeeModel: Identifiable {
     let locationName: String
     let coordinates: CLLocationCoordinate2D
     
+    static func == (lhs: CoffeeModel, rhs: CoffeeModel) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 
