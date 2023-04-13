@@ -8,42 +8,6 @@
 import XCTest
 @testable import Coffee
 
-protocol CoffeeService {
-    var coffees: [CoffeeModel] { get async throws }
-}
-
-class RemoteCoffeeLoader: CoffeeService {
-    var coffees: [Coffee.CoffeeModel] {
-        get async throws {
-            return []
-        }
-    }
-}
-
-class MockRemoteCoffeeLoader: CoffeeService {
-    
-    var coffeesResult: Result<[CoffeeModel], Error> = .success([])
-    
-    var coffees: [CoffeeModel] {
-        get async throws {
-            try coffeesResult.get()
-        }
-    }
-}
-
-class ContentViewModel: ObservableObject {
-    
-    let coffeeService: CoffeeService
-    
-    init(coffeeService: CoffeeService) {
-        self.coffeeService = coffeeService
-    }
-    
-    func loadCoffees() async throws -> [CoffeeModel] {
-        return try await coffeeService.coffees
-    }
-    
-}
 
 
 final class CoffeeTests: XCTestCase {
@@ -68,6 +32,18 @@ final class CoffeeTests: XCTestCase {
     
     func test_loadCoffees_failure() async throws {
         
+    }
+    
+    
+    class MockRemoteCoffeeLoader: CoffeeService {
+        
+        var coffeesResult: Result<[CoffeeModel], Error> = .success([])
+        
+        var coffees: [CoffeeModel] {
+            get async throws {
+                try coffeesResult.get()
+            }
+        }
     }
 
 }

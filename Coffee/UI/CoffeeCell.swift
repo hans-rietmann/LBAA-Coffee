@@ -24,8 +24,7 @@ struct CoffeeCell: View {
                     .foregroundColor(Color.accentColor)
                 VStack(alignment: .leading) {
                     Text(coffee.name)
-                        .font(.headline)
-                        .foregroundColor(.primary)
+                        .rowTitleStyle()
                     Text(coffee.locationName)
                         .font(.subheadline)
                         .foregroundColor(.secondary)

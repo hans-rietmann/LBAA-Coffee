@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let coffees: [CoffeeModel]
+    @State var coffees: [CoffeeModel] = []
+    @StateObject var model = ContentViewModel(coffeeService: RemoteCoffeeLoader())
     
     var body: some View {
         NavigationView {
@@ -26,16 +27,24 @@ struct ContentView: View {
             }
             .navigationTitle("Coffee")
         }
+        .onAppear {
+            Task {
+                do {
+                    coffees = try await model.loadCoffees()
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(coffees: CoffeeModel.dummies)
+        ContentView()
             .colorInvert()
             .dynamicTypeSize(.xxxLarge)
             .preferredColorScheme(.dark)
             .underline()
-        ContentView(coffees: CoffeeModel.dummies)
     }
 }
